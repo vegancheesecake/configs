@@ -1,0 +1,25 @@
+#!/bin/bash
+
+#   .-'---`-.
+# ,'          `.
+# |             \
+# |              \
+# \           _  \
+# ,\  _    ,'-,/-)\
+# ( * \ \,' ,' ,'-)
+#  `._,)     -',-')
+#    \/         ''/
+#     )        / /
+#    /       ,'-'
+
+status=$(mpc -f "%artist% - %title%?-?")
+
+#кривые костыли для отображения временной отметки при воспроизведении через gmusicproxy
+metadata=$(echo $status | sed 's/?-?.*//')
+hasmetadata=$(echo $status | grep "?-?") #...
+if [ -z "$hasmetadata" ]; then 
+	echo "none"
+else
+	echo -n "$metadata "
+	echo -n "[$(echo $status | sed 's/^.*?-?//' | awk '{print $3}')]"
+fi

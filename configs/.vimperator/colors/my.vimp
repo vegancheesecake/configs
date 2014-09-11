@@ -1,0 +1,19 @@
+" ==Vimperator_Color_Scheme==
+" name: Darkness
+" ==Darkness_Colorscheme_Settings==
+
+"StatusLine settings
+hi StatusLine           color: #000000; background: #cccccc; font-family: PT Sans !important; font-size: 12pt;
+
+"CmdLine settings excluding Gradient
+hi CmdLine              background: #0e0e0e; color: #cccccc; font-size: 12pt;
+hi Normal		color: #000000; background: #cccccc; font-family: PT Sans !important; font-size: 12pt;
+"For other descriptions of each item, please see ``Styling'' section included with Vimperator
+hi CmdLine>* -append font-family: Terminus;
+hi Title -append font-family: Terminus;
+
+"Hint section
+hi Hint                 font-family: PT Sans; font-size: 15px; color: #cccccc; background-color: black; padding: 0px 5px 0px 5px;
+hi HintElem             background-color: rgba(00, 00, 00, 0.4);        color: #cccccc;
+hi HintActive           background-color: rgba(00, 00, 00, 0.4);        color: #ffffff;
+

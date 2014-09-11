@@ -1,0 +1,24 @@
+background        no
+out_to_console    yes
+#out_to_x	  no
+update_interval   1
+total_run_times   0 
+short_units       yes
+uppercase         no
+use_spacer        left
+hddtemp_host 	  192.168.15.1
+hddtemp_port	  7634
+TEXT
+  [\
+{ "full_text":"${cpu cpu0}% ${hwmon 1 temp 1}°C ", "color":"\#cccccc", "icon":"/home/user/.conky/cpu.xbm",  "icon_color":"\#cccccc"},\
+{ "full_text":"$mem/$memmax ", "color":"\#cccccc", "icon":"/home/user/.conky/mem.xbm",  "icon_color":"\#cccccc"},\
+{ "full_text":"${hwmon 0 temp 1}°C ", "color":"\#cccccc", "icon":"/home/user/.conky/gpu.xbm",  "icon_color":"\#cccccc"},\
+{ "full_text":"${hddtemp /dev/sda}°C ${hddtemp /dev/sdb}°C ${hddtemp /dev/sdc}°C ", "color":"\#cccccc", "icon":"/home/user/.conky/hdd.xbm",  "icon_color":"\#cccccc"},\
+{ "full_text":"${downspeed eth0} ${upspeed eth0} ", "color":"\#cccccc", "icon":"/home/user/.conky/net-wired.xbm",  "icon_color":"\#cccccc"},\
+{ "full_text":"/:${fs_free /} /home:${fs_free /home} ", "color":"\#cccccc", "icon":"/home/user/.conky/fs.xbm",  "icon_color":"\#cccccc"},\
+{ "full_text":"${exec cat ~/.mcabber/unread} ", "color":"\#cccccc", "icon":"/home/user/.conky/im.xbm",  "icon_color":"\#cccccc"},\
+{ "full_text":"${exec cat ~/.conky/mail} ", "color":"\#cccccc", "icon":"/home/user/.conky/mail.xbm",  "icon_color":"\#cccccc"},\
+{ "full_text":"${exec skb 1} ", "color":"\#cccccc", "icon":"/home/user/.conky/kbd.xbm",  "icon_color":"\#cccccc"},\
+{ "full_text":" ${time %d %b %a} ", "color":"\#cccccc"},\
+{ "full_text":" ${time %H:%M}  ", "color":"\#cccccc"}\
+  ],

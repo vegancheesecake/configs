@@ -1,0 +1,20 @@
+# DO NOT EDIT! This file will be overwritten by LXAppearance.
+# Any customization should be done in ~/.gtkrc-2.0.mine instead.
+
+gtk-theme-name="Numix-Mycolors"
+gtk-icon-theme-name="ACYL_Icon_Theme_0.9.4"
+gtk-font-name="PT Sans 10"
+gtk-cursor-theme-name="Simple-and-Soft"
+gtk-cursor-theme-size=0
+gtk-toolbar-style=GTK_TOOLBAR_BOTH
+gtk-toolbar-icon-size=GTK_ICON_SIZE_LARGE_TOOLBAR
+gtk-button-images=1
+gtk-menu-images=1
+gtk-enable-event-sounds=1
+gtk-enable-input-feedback-sounds=1
+gtk-xft-antialias=1
+gtk-xft-hinting=1
+gtk-xft-hintstyle="hintfull"
+gtk-xft-rgba="rgb"
+gtk-color-scheme="menu_fg_color:#000000\ntooltip_fg_color:#000000\nlink_color:#555555\npanel_bg_color:#cccccc\nbase_color:#cccccc\npanel_fg_color:#000000\nselected_fg_color:#eeeeee\ntext_color:#000000\nmenu_bg_color:#cccccc\nmenubar_bg_color:#cccccc\nbg_color:#cccccc\ntoolbar_bg_color:#cccccc\ntooltip_bg_color:#cccccc\ntitlebar_bg_color:#2d2d2d\ntitlebar_fg_color:#dcdcdc\nmenubar_fg_color:#000000\nselected_bg_color:#666666\nfg_color:#000000\ntoolbar_fg_color:#000000\n"
+include "/home/user/.gtkrc-2.0.mine"

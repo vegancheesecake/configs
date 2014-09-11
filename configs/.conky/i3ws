@@ -1,0 +1,33 @@
+#!/bin/bash
+
+WS=$(i3-msg -t get_workspaces)
+
+i=0
+for j in $(echo $WS | grep -o '"num":.' | sed 's/[^0-9]//g'); do
+	number[$i]=$j
+	let i+=1
+done
+
+i=0
+for j in $(echo $WS | grep -o 'HDMI-0\|DVI-I-1'); do
+        output[$i]=$j
+        let i+=1
+done
+
+i=0
+for j in $(echo $WS | grep -o '"visible":false\|"visible":true' | sed 's/"visible"://'); do
+        visible[$i]=$j
+        let i+=1
+done
+
+i=0
+while [ "$i" -lt "${#output[@]}" ] ; do
+	if [ "${output[$i]}" == "$1" ]; then
+		if [ "${visible[$i]}" == "true" ]; then
+			echo -n "\${color white}${number[$i]}\${color} "
+		else		
+			echo -n "${number[$i]} "
+		fi
+	fi
+	let i+=1
+done

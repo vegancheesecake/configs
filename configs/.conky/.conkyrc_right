@@ -1,0 +1,15 @@
+background        no
+out_to_console    yes
+#out_to_x	  no
+update_interval   1
+total_run_times   0 
+short_units       yes
+uppercase         no
+use_spacer        left
+hddtemp_host 	  192.168.15.1
+hddtemp_port	  7634
+TEXT
+  [ \
+{ "full_text":"${exec mpcconky}", "color":"\#cccccc", "icon":"/home/user/.conky/music.xbm",  "icon_color":"\#cccccc"},\
+{ "full_text":"${exec /home/user/.conky/vol level} ", "color":"\#cccccc", ${exec /home/user/.conky/vol icon} ,  "icon_color":"\#cccccc"}\
+  ],

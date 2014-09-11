@@ -1,0 +1,51 @@
+
+*foreground: #cccccc
+*background: #0e0e0e
+*cursorColor: #f3f3f3
+
+! Black  + DarkGrey
+*color0:  #0e0e0e
+*color8:  #575757
+! DarkRed + Red
+*color1:  #D15452
+*color9:  #EF2929
+! DarkGreen + Green
+*color2:  #4E9A06
+*color10: #A3E266
+! DarkYellow + Yellow
+*color3:  #C4A000
+*color11: #FCED76
+! DarkBlue + Blue
+*color4:  #3465A4
+*color12: #729FCF
+! DarkMagenta + Magenta
+*color5:  #75507B
+*color13: #AD7FA8
+!DarkCyan + Cyan 
+*color6:  #4D999A
+*color14: #8B9898
+! LightGrey + White
+*color7:  #999999
+*color15: #cccccc
+
+URxvt*dynamicColors:     on   
+URxvt.scrollBar: false
+URxvt*scrollTtyOutput: false
+URxvt*scrollWithBuffer:	true
+URxvt*scrollTtyKeypress: true
+
+!URxvt.font:		-*-terminus-medium-r-*-*-16-*-*-*-*-*-*-r
+!URxvt.boldFont:	-*-terminus-bold-r-*-*-16-*-*-*-*-*-*-r
+URxvt.font: 		xft:Terminus:11
+
+URxvt*perl-lib:		/usr/lib/urxvt/perl/
+URxvt*perl-ext-common:	default,matcher,vtwheel
+URxvt.url-launcher:	/usr/bin/firefox
+URxvt*matcher.button:	1
+URxvt*matcher.pattern.1: \\bwww\\.[\\w-]+\\.[\\w./?&@#-]*[\\w/-]
+
+URxvt.keysym.Control-Up:    \033[1;5A
+URxvt.keysym.Control-Down:  \033[1;5B
+URxvt.keysym.Control-Left:  \033[1;5D
+URxvt.keysym.Control-Right: \033[1;5C
+

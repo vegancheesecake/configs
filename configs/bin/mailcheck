@@ -1,0 +1,35 @@
+#!/bin/bash
+
+server[0]="mail.server.ru"
+login[0]="user@server.ru"
+pass[0]="pass"
+
+server[1]="mail.server.info"
+login[1]="user@server.info"
+pass[1]="pass"
+
+folders=( "INBOX" "INBOX.ALERT" "INBOX.gmail" "INBOX.post-tracker" "INBOX.webform" )
+
+
+unseen() {
+	{
+	sleep 2
+	echo "? LOGIN ${login[$1]} ${pass[$1]}"
+	sleep 1
+	for i in ${!folders[*]}; do
+		echo "a STATUS ${folders[$i]} (UNSEEN)"
+	done
+	sleep 1
+	echo 'a LOGOUT'
+	} | openssl s_client -connect ${server[$1]}:993 -crlf 2>/dev/null | grep  'UNSEEN' | sed 's/[^0-9]//g' 
+}
+
+{
+	a=0
+	for i in ${!server[*]}; do
+		unseen $a  
+		let "a+=1"
+	done 
+} | paste -sd+ - | bc > /tmp/mailcheck
+#Без этой строчки индикатор в conky будет мерцать при обновлении файла
+cp /tmp/mailcheck $HOME/.conky/mail

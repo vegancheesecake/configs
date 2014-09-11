@@ -1,0 +1,18 @@
+#!/bin/bash
+
+case $1 in
+
+"icon")
+	muted=$(amixer get Master | grep 'Front Left:' | grep -v off)
+	if [ -z "$muted" ]; then
+		echo '"icon":"/home/user/.conky/vol-mute.xbm"'
+	else
+		echo '"icon":"/home/user/.conky/vol-hi.xbm"'
+	fi
+;;
+
+"level")
+	amixer get Master | grep 'Front Left:' | sed 's/\].*$//;s/^.*\[//'
+;;
+esac
+

@@ -1,0 +1,90 @@
+#!/bin/bash
+
+cp ~/.conky/.conkyrc_left ~/.conky/.conkyrc_left0
+cp ~/.conky/.conkyrc_right ~/.conky/.conkyrc_right0
+cp ~/.i3/config ~/.i3/config0
+cp ~/.gtkrc-2.0.mine ~/.gtkrc-2.0.mine0
+
+case $1 in
+
+"cycle"|"")
+	dynamic-colors cycle
+	;;
+"gtk")
+	gtkcolor=$(cat ~/.dynamic-colors/gtk)
+	if [ "$gtkcolor" == 1 ]; then
+		echo 0 > ~/.dynamic-colors/gtk
+		sed -i "s/base_color.*$/base_color:#cccccc\\\nbg_color:#cccccc\\\ntooltip_bg_color:#cccccc\\\nselected_bg_color:#666666\\\ntext_color:#000000\\\nfg_color:#000000\\\ntooltip_fg_color:#000000\\\nselected_fg_color:#eeeeee\\\nmenubar_bg_color:#cccccc\\\nmenubar_fg_color:#000000\\\ntoolbar_bg_color:#cccccc\\\ntoolbar_fg_color:#000000\\\nmenu_bg_color:#cccccc\\\nmenu_fg_color:#000000\\\npanel_bg_color:#cccccc\\\npanel_fg_color:#000000\\\nlink_color:#555555\\\ntitlebar_bg_color:#2d2d2d\\\ntitlebar_fg_color:#dcdcdc\"/" ~/.gtkrc-2.0.mine
+		gtkrc-reload
+	else
+		echo 1 > ~/.dynamic-colors/gtk
+	fi
+	;;
+*)
+	dynamic-colors switch $1
+	;;
+esac
+
+sleep 0.1
+echo 1 > ~/.dynamic-colors/control
+#killall -USR2 bash
+
+colorscheme=$(cat ~/.colorscheme)
+source ~/.dynamic-colors/colorschemes/$colorscheme.sh
+
+#Чтобы терминал не мерцал при запуске
+echo *foreground: $foreground > ~/.Xdefaults.color
+echo *background: $background >> ~/.Xdefaults.color
+echo *cursorColor: $cursor >> ~/.Xdefaults.color
+echo *color0: $color0 >> ~/.Xdefaults.color
+echo *color1: $color1 >> ~/.Xdefaults.color
+echo *color2: $color2 >> ~/.Xdefaults.color
+echo *color3: $color3 >> ~/.Xdefaults.color
+echo *color4: $color4 >> ~/.Xdefaults.color
+echo *color5: $color5 >> ~/.Xdefaults.color
+echo *color6: $color6 >> ~/.Xdefaults.color
+echo *color7: $color7 >> ~/.Xdefaults.color
+echo *color8: $color8 >> ~/.Xdefaults.color
+echo *color9: $color9 >> ~/.Xdefaults.color
+echo *color10: $color10 >> ~/.Xdefaults.color
+echo *color11: $color11 >> ~/.Xdefaults.color
+echo *color12: $color12 >> ~/.Xdefaults.color
+echo *color13: $color13 >> ~/.Xdefaults.color
+echo *color14: $color14 >> ~/.Xdefaults.color
+echo *color15: $color15 >> ~/.Xdefaults.color
+
+xrdb ~/.Xdefaults.color
+							#	border  	backgr. 	text    	indicator
+sed -i "s/client.focused .*$/client.focused 			${color8}	${focused}	${foreground}	${color7}/" ~/.i3/config
+sed -i "s/client.focused_inactive .*$/client.focused_inactive 	${color8}	${highlight}	${foreground}	${color7}/" ~/.i3/config
+sed -i "s/client.unfocused .*$/client.unfocused 		${color8}	${highlight}	${foreground}	${color7}/" ~/.i3/config
+sed -i "s/client.urgent .*$/client.urgent 			${color8}	${color1}	${foreground}	${color7}/" ~/.i3/config
+
+sed -i "s/focused_workspace .*$/focused_workspace 	${foreground}	${highlight}	${foreground}/" ~/.i3/config
+sed -i "s/active_workspace .*$/active_workspace 	${foreground}	${highlight}	/" ~/.i3/config
+sed -i "s/inactive_workspace .*$/inactive_workspace 	${foreground}	${background}	/" ~/.i3/config
+sed -i "s/urgent_workspace .*$/urgent_workspace 	${foreground}	${color1}	/" ~/.i3/config
+
+sed -i "s/background .*$/background ${background}/" ~/.i3/config
+sed -i "s/statusline .*$/statusline ${color7}/" ~/.i3/config
+
+sed -i "s/\"color\":\"\\\#....../\"color\":\"\\\ ${foreground}/;s/\\\ #/\\\#/" ~/.conky/.conkyrc_left #черная магия sed
+sed -i "s/\"color\":\"\\\#....../\"color\":\"\\\ ${foreground}/;s/\\\ #/\\\#/" ~/.conky/.conkyrc_right
+sed -i "s/\"icon_color\":\"\\\#....../\"icon_color\":\"\\\ ${foreground}/;s/\\\ #/\\\#/" ~/.conky/.conkyrc_left
+sed -i "s/\"icon_color\":\"\\\#....../\"icon_color\":\"\\\ ${foreground}/;s/\\\ #/\\\#/" ~/.conky/.conkyrc_right
+sed -i "s/bindsym Super_L exec dmenu_run .*$/bindsym Super_L exec dmenu_run -b -nb '${background}' -nf '${color7}' -sb '${highlight}' -sf  '${color7}' -fn 'Terminus-12'/" ~/.i3/config
+#sed -i "s/bindsym \$mod+Tab exec rofi .*-now$/bindsym \$mod+Tab exec rofi -font Terminus:12 -hlbg '${highlight}' -now/" ~/.i3/config
+sed -i "s/bindsym Super_L exec exec rofi .*-rnow$/bindsym Super_L exec exec rofi -font Terminus:12 -hlbg '${highlight}' -rnow/" ~/.i3/config
+
+#Меняем цвета темы gtk2
+gtkcolor=$(cat ~/.dynamic-colors/gtk)
+if [ "$gtkcolor" == 1 ]; then
+	sed -i "s/base_color.*$/base_color:${background}\\\nbg_color:${background}\\\ntooltip_bg_color:${background}\\\nselected_bg_color:${highlight}\\\ntext_color:${foreground}\\\nfg_color:${foreground}\\\ntooltip_fg_color:${foreground}\\\nselected_fg_color:#eeeeee\\\nmenubar_bg_color:${background}\\\nmenubar_fg_color:${foreground}\\\ntoolbar_bg_color:${background}\\\ntoolbar_fg_color:${foreground}\\\nmenu_bg_color:${background}\\\nmenu_fg_color:${foreground}\\\npanel_bg_color:${background}\\\npanel_fg_color:${foreground}\\\nlink_color:${color8}\\\ntitlebar_bg_color:#2d2d2d\\\ntitlebar_fg_color:#dcdcdc\"/" ~/.gtkrc-2.0.mine
+
+	gtkrc-reload #https://aur.archlinux.org/packages/gtkrc-reload/
+fi
+
+killall dunst
+dunst -nb "${background}" -nf "${foreground}" &
+
+i3-msg restart

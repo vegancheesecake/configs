@@ -1,0 +1,76 @@
+## General options
+set header_cache = "~/.cache/mutt"
+set certificate_file="~/.mutt/certs"
+set imap_check_subscribed
+set imap_keepalive = 120
+unset imap_passive
+set mail_check = 60
+set mbox_type=Maildir
+set sort=reverse-date-sent
+## ACCOUNT1
+source "~/.mutt/mail1"
+# Here we use the $folder variable that has just been set in the sourced file.
+# We must set it right now otherwise the 'folder' variable will change in the next sourced file.
+folder-hook $folder 'source ~/.mutt/mail1'
+
+## ACCOUNT2
+source "~/.mutt/mail2"
+folder-hook *user@server.info/ 'source ~/.mutt/mail2'
+
+
+
+# set up the sidebar, default not visible
+set sidebar_width=24
+set sidebar_visible=yes
+set sidebar_delim=' '
+set sidebar_sort=yes
+
+# Ctrl-n, Ctrl-p to select next, previous folder.
+# Ctrl-o to open selected folder.
+bind index,pager \CP sidebar-prev
+bind index,pager \CN sidebar-next
+bind index,pager \CO sidebar-open
+
+# Pager View Options ---------------------------------
+set pager_index_lines = 10 # number of index lines to show
+set pager_context = 3      # number of context lines to show
+set pager_stop             # don't go to next message automatically
+set menu_scroll            # scroll in menus
+set tilde                  # show tildes like in vim
+unset markers              # no ugly plus signs
+
+set quote_regexp = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
+alternative_order text/plain text/enriched text/html
+
+source ~/.mutt/colorsrc
+
+macro index   <f5> <imap-fetch-mail><shell-escape>mailcheck<enter>
+macro browser <f5> <imap-fetch-mail><shell-escape>mailcheck<enter>
+macro pager <f5> <imap-fetch-mail><shell-escape>mailcheck<enter>
+set wait_key="no"
+set mailcap_path="~/.mutt/mailcap"
+auto_view text/html                                   # view html automatically
+alternative_order text/plain text/enriched text/html  # save html for last
+
+#макрос для просмотра вложений
+macro attach <return> \
+"\
+<enter-command>unset wait_key<enter>\
+<shell-escape>rm -f /tmp/mutt-attach<enter>\
+<save-entry><kill-line>/tmp/mutt-attach<enter>\
+<shell-escape>xdg-open /tmp/mutt-attach 2>/dev/null &^A\
+"
+
+set mime_forward=yes 
+set mime_forward_rest=yes 
+
+# Move message(s) to Spam/Verified by pressing "S"
+macro index S "<tag-prefix><enter-command>unset resolve<enter><tag-prefix><clear-flag>N<tag-prefix><enter-command>set resolve<enter><tag-prefix><save-message>=Spam<enter>" "file as Spam"
+macro pager S "<save-message>=Spam<enter>" "file as Spam"
+
+
+#заголовки писем
+ignore *
+unignore from date subject to cc
+unignore organization organisation x-mailer: x-newsreader: x-mailing-list:
+unignore posted-to:
