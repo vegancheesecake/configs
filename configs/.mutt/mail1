@@ -1,0 +1,25 @@
+## Receive options.
+set imap_user=user@server.ru
+set imap_pass=Pass
+set folder = imaps://mail.server.ru/
+set spoolfile = +INBOX
+set postponed = +Drafts
+set record = +Sent
+set trash="=Trash"
+mailboxes  "+A-- MAIL1 --" =INBOX =INBOX.ALERT =INBOX.gmail =INBOX.post-tracker =INBOX.webform
+
+## Send options.
+set my_pass1=Pass
+set my_user1=user@server.ru
+
+set smtp_url=smtps://$my_user1:$my_pass1@mail.server.ru
+set realname = 'My Name'
+set from = user@server.ru
+set use_from = yes
+set my_name = "My Name"
+# Connection options
+set ssl_force_tls = yes
+unset ssl_starttls
+
+account-hook $folder "set imap_user=user@server.ru imap_pass=Pass"
+signature="~/.mutt/mail.sig"

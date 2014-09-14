@@ -1,0 +1,26 @@
+## Receive options.
+set imap_user=user@server.info
+set imap_pass=Pass
+set folder = imaps://mail.server.info
+set spoolfile = +INBOX
+set postponed = +Drafts
+set record = +Sent
+set trash="=Trash"
+mailboxes  "+A-- MAIL2 --" =INBOX =INBOX.webform
+
+## Send options.
+set my_pass=Pass
+set my_user=user@server.info
+
+set smtp_url=smtps://$my_user:$my_pass@mail.server.info
+set realname = 'My Name'
+set from = user@server.info
+set use_from = yes
+set my_name = "My Name"
+# Connection options
+set ssl_force_tls = yes
+unset ssl_starttls
+
+account-hook $folder "set imap_user=user@server.info imap_pass=Pass"
+
+set signature="~/.mutt/mail.sig"
